@@ -11,10 +11,12 @@ class Pix2PixTrainer():
     def __init__(self, opt):
         self.opt = opt
         self.pix2pix_model = Pix2PixModel(opt)
-        self.pix2pix_model = torch.nn.parallel.DistributedDataParallel(self.pix2pix_model,
-                                    device_ids=[opt.gpu], find_unused_parameters=True)
-        self.pix2pix_model_on_one_gpu = self.pix2pix_model.module
+        # self.pix2pix_model = torch.nn.parallel.DistributedDataParallel(self.pix2pix_model,
+        #                             device_ids=[opt.gpu], find_unused_parameters=True)
+        # self.pix2pix_model_on_one_gpu = self.pix2pix_model.module
 
+        self.pix2pix_model_on_one_gpu = self.pix2pix_model
+        
         self.generated = None
         if opt.isTrain:
             self.optimizer_G, self.optimizer_D = self.pix2pix_model_on_one_gpu.create_optimizers(opt)

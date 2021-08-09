@@ -13,9 +13,9 @@ class CocoDataset(Pix2pixDataset):
             parser.set_defaults(load_size=286)
         else:
             parser.set_defaults(load_size=256)
-        parser.set_defaults(crop_size=256)
+        parser.set_defaults(crop_size=160)
         parser.set_defaults(display_winsize=256)
-        parser.set_defaults(label_nc=182)
+        parser.set_defaults(label_nc=175)
         parser.set_defaults(contain_dontcare_label=True)
         parser.set_defaults(cache_filelist_read=True)
         parser.set_defaults(cache_filelist_write=True)

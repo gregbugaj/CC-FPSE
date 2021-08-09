@@ -109,8 +109,16 @@ class Pix2PixModel(torch.nn.Module):
         # create one-hot label map
         label_map = data['label']
         bs, _, h, w = label_map.size()
+
+        # print('------')
+        # print(bs)
+        # print(_)
+        # print(h)
+        # print(w)
+
         nc = self.opt.label_nc + 1 if self.opt.contain_dontcare_label \
             else self.opt.label_nc
+        
         input_label = self.FloatTensor(bs, nc, h, w).zero_()
         input_semantics = input_label.scatter_(1, label_map, 1.0)
 

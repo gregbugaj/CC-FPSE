@@ -34,7 +34,9 @@ def main_worker(gpu, world_size, idx_server, opt):
     world_size = opt.world_size
     rank = idx_server * ngpus_per_node + gpu
     opt.gpu = gpu
+
     dist.init_process_group(backend='nccl', init_method=opt.dist_url, world_size=world_size, rank=rank)
+
     torch.cuda.set_device(opt.gpu)
 
     # load the dataset
@@ -94,4 +96,6 @@ def main_worker(gpu, world_size, idx_server, opt):
     print('Training was successfully finished.')
     
 if __name__ == '__main__':
+    print(torch.distributed.is_available())
+    print(torch.backends.cudnn.version())
     main()
